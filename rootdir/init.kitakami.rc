@@ -329,7 +329,7 @@ on property:ro.boot.baseband=msm
 # QCOM prop
 service qmuxd /system/vendor/bin/qmuxd
     class main
-    user root
+    user radio
     group radio audio bluetooth gps diag
     disabled
 
