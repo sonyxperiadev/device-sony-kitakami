@@ -1,0 +1,120 @@
+# Copyright 2014 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+on charger
+    # Enable Power modes and set the CPU Freq Sampling rates
+    write /sys/module/msm_thermal/core_control/enabled 0
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/devices/system/cpu/cpu4/online 1
+    write /sys/devices/system/cpu/cpu5/online 1
+    write /sys/devices/system/cpu/cpu6/online 1
+    write /sys/devices/system/cpu/cpu7/online 1
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "powersave"
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "powersave"
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "powersave"
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "powersave"
+    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor "powersave"
+    write /sys/devices/system/cpu/cpu5/cpufreq/scaling_governor "powersave"
+    write /sys/devices/system/cpu/cpu6/cpufreq/scaling_governor "powersave"
+    write /sys/devices/system/cpu/cpu7/cpufreq/scaling_governor "powersave"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 384000 
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 384000 
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 384000 
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 384000 
+    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 384000
+    write /sys/devices/system/cpu/cpu5/cpufreq/scaling_min_freq 384000
+    write /sys/devices/system/cpu/cpu6/cpufreq/scaling_min_freq 384000
+    write /sys/devices/system/cpu/cpu7/cpufreq/scaling_min_freq 384000
+    write /sys/module/msm_thermal/core_control/enabled 1
+    write /sys/devices/system/cpu/cpu1/online 0
+    write /sys/devices/system/cpu/cpu2/online 0
+    write /sys/devices/system/cpu/cpu3/online 0
+    write /sys/devices/system/cpu/cpu4/online 0
+    write /sys/devices/system/cpu/cpu5/online 0
+    write /sys/devices/system/cpu/cpu6/online 0
+    write /sys/devices/system/cpu/cpu7/online 0
+
+on boot
+    # kanuti boots with performance governor.
+    # Switch one core to interactive to set permissions, for power hal and system server.
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
+    chown system system /dev/cpuctl/cpu.notify_on_migrate
+    chmod 0660 /dev/cpuctl/cpu.notify_on_migrate
+    chown root system /sys/devices/system/cpu/cpu1/online
+    chown root system /sys/devices/system/cpu/cpu2/online
+    chown root system /sys/devices/system/cpu/cpu3/online
+    chown root system /sys/devices/system/cpu/cpu4/online
+    chown root system /sys/devices/system/cpu/cpu5/online
+    chown root system /sys/devices/system/cpu/cpu6/online
+    chown root system /sys/devices/system/cpu/cpu7/online
+    chmod 664 /sys/devices/system/cpu/cpu1/online
+    chmod 664 /sys/devices/system/cpu/cpu2/online
+    chmod 664 /sys/devices/system/cpu/cpu3/online
+    chmod 664 /sys/devices/system/cpu/cpu4/online
+    chmod 664 /sys/devices/system/cpu/cpu5/online
+    chmod 664 /sys/devices/system/cpu/cpu6/online
+    chmod 664 /sys/devices/system/cpu/cpu7/online
+    write /sys/devices/system/cpu/cpu1/online 0
+    write /sys/devices/system/cpu/cpu2/online 0
+    write /sys/devices/system/cpu/cpu3/online 0
+    write /sys/devices/system/cpu/cpu4/online 0
+    write /sys/devices/system/cpu/cpu5/online 0
+    write /sys/devices/system/cpu/cpu6/online 0
+    write /sys/devices/system/cpu/cpu7/online 0
+
+on property:init.svc.bootanim=stopped
+    # Switch to ROW and balanced mode after boot for better UX
+    write /sys/module/msm_thermal/core_control/enabled 0
+
+    # configure governor settings for little cluster
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load 1
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_migration_notif 0
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay "20000 750000:40000 800000:20000"
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 90
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate 20000
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 768000 
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy 0
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads "85 780000:90"
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 40000
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 384000 
+
+    # configure governor settings for big cluster
+    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor "interactive"
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/use_sched_load 1
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/use_migration_notif 0
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay "20000 750000:40000 800000:20000"
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load 99
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate 20000
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq 768000
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/io_is_busy 0
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads "85 780000:90"
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time 40000
+    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 384000
+
+    write /sys/module/msm_thermal/core_control/enabled 1
+
+    # Enable task migration fixups in the scheduler
+    write /proc/sys/kernel/sched_migration_fixup 1
+
+    #enable rps static configuration
+    write /sys/class/net/rmnet_ipa0/queues/rx-0/rps_cpus 0
+    write /proc/sys/kernel/sched_small_task 30
+
+    write /sys/class/kgsl/kgsl-3d0/devfreq/governor "msm-adreno-tz"
+    write /dev/cpuctl/cpu.notify_on_migrate 1
+
+    write /sys/module/lpm_levels/parameters/sleep_disabled 0
