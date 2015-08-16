@@ -121,23 +121,4 @@ BUILD_KERNEL := true
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
 
-BOARD_SEPOLICY_DIRS += \
-    device/sony/kitakami/sepolicy
-
-BOARD_SEPOLICY_UNION += \
-    addrsetup.te \
-    device.te \
-    file.te \
-    property.te \
-    sct.te \
-    sensors.te \
-    service.te \
-    system_app.te \
-    tad.te \
-    ta_qmi.te \
-    thermanager.te \
-    timekeep.te \
-    file_contexts \
-    property_contexts \
-    service_contexts
-
+BOARD_SEPOLICY_DIRS += device/sony/kitakami/sepolicy
