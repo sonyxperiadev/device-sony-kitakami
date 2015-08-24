@@ -177,8 +177,6 @@ Only the three quirks included above are recognized at this point:
         </MediaCodec>
         <!-- Audio Software  -->
         <MediaCodec name="OMX.google.aac.decoder" type="audio/mp4a-latm" />
-        <MediaCodec name="OMX.somc.alac.decoder" type="audio/alac" />
-        <MediaCodec name="OMX.somc.dsd.decoder" type="audio/dsd"/>
         <MediaCodec name="OMX.qcom.audio.decoder.Qcelp13" type="audio/qcelp" >
             <Quirk name="requires-global-flush" />
         </MediaCodec>
