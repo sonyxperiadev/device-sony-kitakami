@@ -21,6 +21,10 @@ on early-init
 on init
     mkdir /tmp
     mount tmpfs tmpfs /tmp nosuid mode=0755,uid=0,gid=0
+
+    mkdir /dev/block/bootdevice
+    symlink /dev/block/platform/soc.0/by-name /dev/block/bootdevice/by-name
+
     symlink /dev/socket /tmp
 
     # See storage config details at http://source.android.com/tech/storage/
@@ -519,3 +523,20 @@ service timekeep /system/bin/timekeep restore
    user root
    group root
    oneshot
+
+service per_mgr /system/vendor/bin/pm-service
+    class core
+    user system
+    group system net_raw
+
+service per_proxy /system/vendor/bin/pm-proxy
+    class core
+    user system
+    group system net_raw
+    disabled
+
+on property:init.svc.per_mgr=running
+    start per_proxy
+
+on property:sys.shutdown.requested=*
+    stop per_proxy
