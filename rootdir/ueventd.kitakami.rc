@@ -41,9 +41,12 @@
 /dev/media*               0660   system     camera
 /dev/v4l-subdev*          0660   system     camera
 /dev/qseecom              0660   system     drmrpc
+/dev/pft                  0660   system     drmrpc
 /dev/jpeg0                0660   system     camera
 /dev/jpeg1                0660   system     camera
 /dev/jpeg2                0660   system     camera
+/dev/adsprpc-smd          0664   system     system
+/dev/system_health_monitor 0640  radio      system
 /dev/msm_rotator          0660   system     system
 /dev/hw_random            0660   system     system
 /dev/adsprpc-smd          0664   system     system
@@ -92,6 +95,9 @@
 /dev/uio2                 0660   system     system
 /dev/uio3                 0660   system     system
 /dev/uio4                 0660   system     system
+
+# SSR devices
+/dev/subsys_*         0640   system     system
 
 # BT
 /dev/hidraw*                                        0666 system    system
