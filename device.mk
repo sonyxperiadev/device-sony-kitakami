@@ -12,12 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+SONY_ROOT = device/sony/kitakami/rootdir
+
 SOMC_PLATFORM := kitakami
 
 DEVICE_PACKAGE_OVERLAYS += \
     device/sony/kitakami/overlay
 
-SONY_ROOT = device/sony/kitakami/rootdir
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/init.recovery.kitakami.rc:root/init.recovery.kitakami.rc \
     $(SONY_ROOT)/init.kitakami.rc:root/init.kitakami.rc \
@@ -84,7 +85,7 @@ PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/usr/keylayout/synaptics_dsx.kl:system/usr/keylayout/synaptics_dsx.kl \
     $(SONY_ROOT)/system/usr/keylayout/touch_fusion.kl:system/usr/keylayout/touch_fusion.kl
 
-#Audio
+# Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.primary.msm8994 \
@@ -97,7 +98,7 @@ PRODUCT_PACKAGES += \
     libaudioalsa \
     libdiag
 
-# for audio.primary.msm8994
+# For audio.primary.msm8994
 PRODUCT_PACKAGES += \
     libtinyalsa \
     libtinycompress \
@@ -111,7 +112,7 @@ PRODUCT_PACKAGES += \
     libqcomvoiceprocessingdescriptors \
     libqcompostprocbundle
 
-#GFX
+# GFX
 PRODUCT_PACKAGES += \
     gralloc.msm8994 \
     hwcomposer.msm8994 \
@@ -123,7 +124,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libion
 
-#OMX
+# OMX
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
     libstagefrighthw \
@@ -133,6 +134,7 @@ PRODUCT_PACKAGES += \
     libOmxVdecHevc \
     libOmxVenc
 
+# Lights
 PRODUCT_PACKAGES += \
     lights.kitakami
 
@@ -143,7 +145,7 @@ PRODUCT_PACKAGES += \
 #    Tag \
 #    nfc_nci.pn54x.default
 
-#GPS
+# GPS
 PRODUCT_PACKAGES += \
     libloc_api_v02 \
     libloc_adapter \
@@ -152,7 +154,7 @@ PRODUCT_PACKAGES += \
     libgps.utils \
     gps.msm8994
 
-#WLAN
+# WLAN
 PRODUCT_PACKAGES += \
     p2p_supplicant.conf \
     gsm_domains.conf \
@@ -165,12 +167,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     keystore.msm8994
 
+# Misc
 PRODUCT_PACKAGES += \
     libmiscta \
     libta \
     tad_static \
     ta_qmi_service
 
+# OSS
 PRODUCT_PACKAGES += \
     timekeep \
     TimeKeep \
@@ -180,7 +184,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     rmt_storage
 
-#Charger
+# Charger
 PRODUCT_PACKAGES += \
     charger_res_images
 
@@ -200,7 +204,8 @@ PRODUCT_PACKAGES += \
     e2fsck
 
 # APN list
-PRODUCT_COPY_FILES += device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
+PRODUCT_COPY_FILES += \
+    device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
 
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -218,8 +223,6 @@ PRODUCT_DEX_PREOPT_DEFAULT_FLAGS := \
 $(call add-product-dex-preopt-module-config,services,--compiler-filter=speed)
 
 # Platform specific default properties
-#
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp \
     persist.data.qmi.adb_logmask=0
-
