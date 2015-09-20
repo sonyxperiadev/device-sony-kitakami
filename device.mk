@@ -114,6 +114,7 @@ PRODUCT_PACKAGES += \
 
 # GFX
 PRODUCT_PACKAGES += \
+    copybit.msm8994 \
     gralloc.msm8994 \
     hwcomposer.msm8994 \
     memtrack.msm8994 \
