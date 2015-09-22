@@ -143,25 +143,7 @@ int getMdpFormat(int format) {
 
 int getMdpFormat(int format, int flags)
 {
-    bool uBwcEnabled = (flags & private_handle_t::PRIV_FLAGS_UBWC_ALIGNED);
     bool tileEnabled = (flags & private_handle_t::PRIV_FLAGS_TILE_RENDERED);
-
-    // Use UBWC extension, if UBWC is enabled
-    if (uBwcEnabled) {
-        switch (format) {
-            case HAL_PIXEL_FORMAT_RGBA_8888:
-                return MDP_RGBA_8888_UBWC;
-            case HAL_PIXEL_FORMAT_RGB_565:
-                return MDP_RGB_565_UBWC;
-            case HAL_PIXEL_FORMAT_NV12_ENCODEABLE:
-            case HAL_PIXEL_FORMAT_YCbCr_420_SP_VENUS:
-            case HAL_PIXEL_FORMAT_YCbCr_420_SP_VENUS_UBWC:
-                return MDP_Y_CBCR_H2V2_UBWC;
-            default:
-                ALOGE("%s: Unsupported HAL format = 0x%x", __func__, format);
-                break;
-        }
-    }
 
     if(!tileEnabled) {
         return getMdpFormat(format);
