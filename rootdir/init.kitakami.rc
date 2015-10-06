@@ -55,6 +55,9 @@ on init
     symlink /mnt/shell/emulated/0 /storage/emulated/legacy
     symlink /storage/usbdisk /usbdisk
     symlink /storage/usbdisk /mnt/usbdisk
+    symlink /system/etc /etc
+    symlink /sys/kernel/debug /d
+    symlink /system/vendor /vendor
 
     mkdir /dev/bus 0755 root root
     mkdir /dev/bus/usb 0755 root root
