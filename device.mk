@@ -214,6 +214,7 @@ PRODUCT_PACKAGES += \
 
 # APN list
 PRODUCT_COPY_FILES += \
+    device/sample/etc/old-apns-conf.xml:system/etc/old-apns-conf.xml \
     device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
 
 # Bluetooth
