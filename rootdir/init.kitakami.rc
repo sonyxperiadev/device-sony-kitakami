@@ -137,7 +137,7 @@ on post-fs-data
     write /data/system/sensors/settings 1
     chmod 664 /data/system/sensors/settings
 
-    chown system /dev/block/platform/msm_sdcc.1/by-name
+    chown system /dev/block/platform/soc.0/by-name
 
     # Permissions for mpdecision and thermald
     mkdir /dev/socket/mpdecision 0770 system system
@@ -150,8 +150,8 @@ on post-fs-data
 
 on charger
     # Booting modem
-    wait /dev/block/platform/msm_sdcc.1/by-name/system
-    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/system /system ro barrier=1
+    wait /dev/block/platform/soc.0/by-name/system
+    mount ext4 /dev/block/platform/soc.0/by-name/system /system ro barrier=1
     start rmt_storage
     start irsc_util
 
