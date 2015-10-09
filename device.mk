@@ -210,6 +210,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     e2fsck
 
+# BoringSSL hacks
+PRODUCT_PACKAGES += \
+    libboringssl-compat
+
 # APN list
 PRODUCT_COPY_FILES += \
     device/sample/etc/old-apns-conf.xml:system/etc/old-apns-conf.xml \

@@ -22,6 +22,9 @@ on init
     mkdir /dev/block/bootdevice
     symlink /dev/block/platform/soc.0/by-name /dev/block/bootdevice/by-name
 
+    # BoringSSL hacks
+    export LD_PRELOAD "/system/lib64/libboringssl-compat.so"
+
     mkdir /dev/bus 0755 root root
     mkdir /dev/bus/usb 0755 root root
 
