@@ -142,11 +142,11 @@ PRODUCT_PACKAGES += \
     lights.kitakami
 
 # NFC packages
-#PRODUCT_PACKAGES += \
-#    com.android.nfc_extras \
-#    NfcNci \
-#    Tag \
-#    nfc_nci.pn54x.default
+PRODUCT_PACKAGES += \
+    com.android.nfc_extras \
+    NfcNci \
+    Tag \
+    nfc_nci.msm8994
 
 # GPS
 PRODUCT_PACKAGES += \
