@@ -227,6 +227,9 @@ PRODUCT_DEX_PREOPT_DEFAULT_FLAGS := \
 
 $(call add-product-dex-preopt-module-config,services,--compiler-filter=speed)
 
+# 64-bit primary, 32-bit secondary
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+
 # Platform specific default properties
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp \
