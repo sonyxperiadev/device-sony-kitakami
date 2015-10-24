@@ -375,12 +375,4 @@
 
     <VideoDecoderCap name="wmv" enabled="false"/>
     <AudioDecoderCap name="wma" enabled="true"/>
-
-    <VideoEditorCap maxInputFrameWidth="1920"
-        maxInputFrameHeight="1088" maxOutputFrameWidth="1920"
-        maxOutputFrameHeight="1088" maxPrefetchYUVFrames="3"/>
-
-    <ExportVideoProfile name="h263" profile="1" level="1"/>
-    <ExportVideoProfile name="h264" profile="1" level="1"/>
-    <ExportVideoProfile name="m4v" profile="1" level="1"/>
 </MediaSettings>
