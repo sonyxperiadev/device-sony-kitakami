@@ -48,7 +48,10 @@ on charger
     write /sys/devices/system/cpu/cpu7/online 0
 
 on boot
-    # kanuti boots with performance governor.
+    # Disable thermal
+    write /sys/module/msm_thermal/core_control/enabled 0
+
+    # Kitakami boots with performance governor.
     # Switch one core to interactive to set permissions, for power hal and system server.
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
     chown system system /dev/cpuctl/cpu.notify_on_migrate
@@ -67,18 +70,17 @@ on boot
     chmod 664 /sys/devices/system/cpu/cpu5/online
     chmod 664 /sys/devices/system/cpu/cpu6/online
     chmod 664 /sys/devices/system/cpu/cpu7/online
-    write /sys/devices/system/cpu/cpu1/online 0
-    write /sys/devices/system/cpu/cpu2/online 0
-    write /sys/devices/system/cpu/cpu3/online 0
-    write /sys/devices/system/cpu/cpu4/online 0
-    write /sys/devices/system/cpu/cpu5/online 0
-    write /sys/devices/system/cpu/cpu6/online 0
-    write /sys/devices/system/cpu/cpu7/online 0
+
+    # Bring CPUs online
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/devices/system/cpu/cpu4/online 1
+    write /sys/devices/system/cpu/cpu5/online 1
+    write /sys/devices/system/cpu/cpu6/online 1
+    write /sys/devices/system/cpu/cpu7/online 1
 
 on property:init.svc.bootanim=stopped
-    # Switch to ROW and balanced mode after boot for better UX
-    write /sys/module/msm_thermal/core_control/enabled 0
-
     # configure governor settings for little cluster
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load 1
@@ -105,6 +107,7 @@ on property:init.svc.bootanim=stopped
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time 40000
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 384000
 
+    # Enable thermal
     write /sys/module/msm_thermal/core_control/enabled 1
 
     # Enable task migration fixups in the scheduler
