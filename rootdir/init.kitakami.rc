@@ -340,9 +340,9 @@ service rmt_storage /system/vendor/bin/rmt_storage
 
 # QCOM prop
 service rfs_access /system/vendor/bin/rfs_access
-   class core
-   user root
-   group system net_raw
+    class core
+    user root
+    group system net_raw
 
 # QCOM prop
 service netmgrd /system/vendor/bin/netmgrd
@@ -457,10 +457,10 @@ service charger /sbin/healthd -c
     seclabel u:r:healthd:s0
 
 service timekeep /system/bin/timekeep restore
-   class late_start
-   user root
-   group root
-   oneshot
+    class late_start
+    user root
+    group root
+    oneshot
 
 service per_mgr /system/vendor/bin/pm-service
     class core
