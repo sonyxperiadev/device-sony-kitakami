@@ -20,7 +20,6 @@ DEVICE_PACKAGE_OVERLAYS += \
     device/sony/kitakami/overlay
 
 PRODUCT_COPY_FILES += \
-    $(SONY_ROOT)/fstab.kitakami:root/fstab.kitakami \
     $(SONY_ROOT)/system/usr/idc/clearpad.idc:system/usr/idc/clearpad.idc \
     $(SONY_ROOT)/system/usr/idc/touch_fusion.idc:system/usr/idc/touch_fusion.idc \
     $(SONY_ROOT)/system/etc/aanc_tuning_mixer.txt:system/etc/aanc_tuning_mixer.txt \
@@ -31,15 +30,20 @@ PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/etc/sec_config:system/etc/sec_config \
     $(SONY_ROOT)/system/etc/gps.conf:system/etc/gps.conf
 
-PRODUCT_COPY_FILES += \
-    $(SONY_ROOT)/init.recovery.kitakami.rc:root/init.recovery.kitakami.rc \
-    $(SONY_ROOT)/init.recovery.kitakami.rc:root/init.recovery.kitakami64_32.rc \
-    $(SONY_ROOT)/init.kitakami.rc:root/init.kitakami.rc \
-    $(SONY_ROOT)/init.kitakami.rc:root/init.kitakami64_32.rc \
-    $(SONY_ROOT)/init.kitakami.usb.rc:root/init.kitakami.usb.rc \
-    $(SONY_ROOT)/init.kitakami.pwr.rc:root/init.kitakami.pwr.rc \
-    $(SONY_ROOT)/ueventd.kitakami.rc:root/ueventd.kitakami.rc \
-    $(SONY_ROOT)/ueventd.kitakami.rc:root/ueventd.kitakami64_32.rc
+# Ramdisk
+PRODUCT_PACKAGES += \
+    fstab.kitakami \
+    init.kitakami.rc \
+    init.kitakami.usb.rc \
+    init.kitakami.pwr.rc \
+    init.recovery.kitakami.rc \
+    ueventd.kitakami.rc
+
+# Symlinks for kitakami64_32
+PRODUCT_PACKAGES += \
+    init.kitakami64_32.rc \
+    init.recovery.kitakami64_32.rc \
+    ueventd.kitakami64_32.rc
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \
