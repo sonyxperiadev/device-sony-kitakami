@@ -50,6 +50,9 @@ enum led_ident {
 	LED_GREEN,
 	LED_BLUE,
 	LED_BACKLIGHT,
+#ifdef BOARD_HAS_LED_BKLT_LP8557
+	LED_BKLT_LP8557,
+#endif
 	LED_BKLT_MDSS
 };
 
@@ -65,6 +68,13 @@ static struct led_desc {
 		.max_brightness_s = "/sys/class/leds/wled:backlight/max_brightness",
 		.brightness = "/sys/class/leds/wled:backlight/brightness",
 	},
+#ifdef BOARD_HAS_LED_BKLT_LP8557
+	[LED_BKLT_LP8557] = {
+		.max_brightness = 0,
+		.max_brightness_s = "/sys/class/leds/lp8557/max_brightness",
+		.brightness = "/sys/class/leds/lp8557/brightness",
+	},
+#endif
 	[LED_BKLT_MDSS] = {
 		.max_brightness = 0,
 		.max_brightness_s = "/sys/class/leds/lcd-backlight/max_brightness",
@@ -225,6 +235,15 @@ static void write_led_scaled(enum led_ident id, int brightness,
 	float brightness_c = ((float)brightness)/255.; 
 	float scaled = max_brightness * brightness_c;
 
+#ifdef BOARD_HAS_LED_BKLT_LP8557
+	// max_brightness should be 4095
+	if (max_brightness == 4095) {
+		brightness_c = ((float)brightness * (max_brightness / 255.));
+		brightness_c = brightness_c / 4095.;
+		scaled = max_brightness * brightness_c;
+	} 
+#endif
+
 	if (pwm && led_descs[id].pwm)
 		write_string(led_descs[id].pwm, pwm);
 
@@ -263,6 +282,9 @@ static int set_light_mdss(struct light_device_t *dev, struct light_state_t const
 
 	pthread_mutex_lock(&g_lock);
 	write_led_scaled(LED_BKLT_MDSS, brightness, NULL, 0);
+#ifdef BOARD_HAS_LED_BKLT_LP8557
+	write_led_scaled(LED_BKLT_LP8557, brightness, NULL, 0);
+#endif
 	pthread_mutex_unlock(&g_lock);
 
 	return 0;
