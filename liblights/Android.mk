@@ -15,6 +15,11 @@
 LOCAL_PATH:= $(call my-dir)
 
 include $(CLEAR_VARS)
+
+ifeq ($(filter-out karin karin_windy,$(TARGET_DEVICE)),)
+LOCAL_CFLAGS := -DBOARD_HAS_LED_BKLT_LP8557
+endif
+
 LOCAL_SRC_FILES := lights.c
 LOCAL_SHARED_LIBRARIES := liblog
 LOCAL_MODULE := lights.kitakami

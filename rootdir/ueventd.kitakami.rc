@@ -131,6 +131,12 @@
 /sys/devices/soc.0/03-qcom,leds-d800/leds/wled:backlight max_brightness 0664 system system
 /sys/devices/soc.0/03-qcom,leds-d800/leds/wled:backlight brightness     0664 system system
 
+# Karin's panel backlight
+/sys/devices/soc.0/fd900000.qcom,mdss_mdp/qcom,mdss_fb_primary.183/leds/lcd-backlight max_brightness    0664 system system
+/sys/devices/soc.0/fd900000.qcom,mdss_mdp/qcom,mdss_fb_primary.183/leds/lcd-backlight brightness        0664 system system
+/sys/devices/soc.0/f9967000.i2c/i2c-5/5-002c/leds/lp8557 max_brightness                                 0664 system system
+/sys/devices/soc.0/f9967000.i2c/i2c-5/5-002c/leds/lp8557 brightness                                     0664 system system
+
 /sys/devices/virtual/graphics/fb1/avi_itc             0664 system graphics
 /sys/devices/virtual/graphics/fb1/avi_cn0_1           0664 system graphics
 /sys/devices/virtual/graphics/fb1/hpd                 0664 system graphics
