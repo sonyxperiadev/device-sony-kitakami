@@ -118,6 +118,11 @@ NFC_NXP_CHIP_TYPE := PN547C2
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
 
+# Enable dex-preoptimization to speed up first boot sequence
+ifeq ($(HOST_OS),linux)
+    WITH_DEXPREOPT ?= true
+endif
+
 BUILD_KERNEL := true
 -include vendor/sony/kernel/KernelConfig.mk
 
