@@ -233,6 +233,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dex2oat-swap=false \
     dalvik.vm.image-dex2oat-filter=speed
 
+# limit dex2oat threads to improve thermals
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.boot-dex2oat-threads=4 \
+    dalvik.vm.dex2oat-threads=2 \
+    dalvik.vm.image-dex2oat-threads=4
+
 # ART
 PRODUCT_DEX_PREOPT_DEFAULT_FLAGS := \
     --compiler-filter=speed
