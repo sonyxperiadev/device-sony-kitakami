@@ -5,10 +5,10 @@
 /dev/pn54x                             u:object_r:nfc_device:s0
 
 # Block devices
-/dev/block/platform/soc.0/by-name/modemst1          u:object_r:modem_efs_partition_device:s0
-/dev/block/platform/soc.0/by-name/modemst2          u:object_r:modem_efs_partition_device:s0
-/dev/block/platform/soc.0/by-name/fsg               u:object_r:modem_efs_partition_device:s0
-/dev/block/platform/soc.0/by-name/TA                u:object_r:trim_area_partition_device:s0
+/dev/block/bootdevice/by-name/by-name/modemst1          u:object_r:modem_efs_partition_device:s0
+/dev/block/bootdevice/by-name/by-name/modemst2          u:object_r:modem_efs_partition_device:s0
+/dev/block/bootdevice/by-name/by-name/fsg               u:object_r:modem_efs_partition_device:s0
+/dev/block/bootdevice/by-name/by-name/TA                u:object_r:trim_area_partition_device:s0
 
 /data/etc/bluetooth_bdaddr             u:object_r:addrsetup_data_file:s0
 
