@@ -122,4 +122,6 @@ on property:init.svc.bootanim=stopped
     write /sys/class/kgsl/kgsl-3d0/devfreq/governor "msm-adreno-tz"
     write /dev/cpuctl/cpu.notify_on_migrate 1
 
+on property:sys.boot_completed=1
+    # Allow CPUs to go in deeper idle state than C0
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
