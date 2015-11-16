@@ -37,6 +37,10 @@ on init
     # Support legacy storage paths
     symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
+    
+    # Right now vendor lives on the same filesystem as system,
+    # but someday that may change.
+    symlink /system/vendor /vendor
 
 on fs
     mount_all ./fstab.kitakami
