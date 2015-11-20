@@ -27,10 +27,6 @@ on init
     mkdir /dev/bus 0755 root root
     mkdir /dev/bus/usb 0755 root root
 
-    # Bluetooth address setting
-    setprop ro.bt.bdaddr_path "/data/etc/bluetooth_bdaddr"
-    chown bluetooth bluetooth ${ro.bt.bdaddr_path}
-
     chown system system /sys/devices/mdss_dsi_panel/panel_id
     chmod 0440 /sys/devices/mdss_dsi_panel/panel_id
 
