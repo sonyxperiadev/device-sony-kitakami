@@ -1,6 +1,9 @@
 # Trim Area daemon
 /dev/socket/tad                        u:object_r:tad_socket:s0
 
+# Bluetooth
+/dev/ttyHS0                            u:object_r:hci_attach_dev:s0
+
 /dev/pn547                             u:object_r:nfc_device:s0
 /dev/pn54x                             u:object_r:nfc_device:s0
 
@@ -9,9 +12,9 @@
 
 /data/etc/bluetooth_bdaddr             u:object_r:addrsetup_data_file:s0
 
+/system/bin/macaddrsetup                      u:object_r:addrsetup_exec:s0
 /system/bin/thermanager                       u:object_r:thermanager_exec:s0
 /system/bin/timekeep                          u:object_r:timekeep_exec:s0
-/system/bin/macaddrsetup                      u:object_r:addrsetup_exec:s0
 /system/vendor/bin/sct_service                u:object_r:sct_exec:s0
 /system/vendor/bin/tad_static                 u:object_r:tad_exec:s0
 /system/vendor/bin/ta_qmi_service             u:object_r:ta_qmi_exec:s0
@@ -26,3 +29,6 @@
 
 /sys/devices/fb000000.qcom,wcnss-wlan/wcnss_mac_addr    u:object_r:sysfs_addrsetup:s0
 /sys/devices/platform/bcmdhd_wlan/macaddr               u:object_r:sysfs_addrsetup:s0
+
+# Bluetooth
+/sys/devices/soc.0/bluesleep.81/rfkill/rfkill0/state          u:object_r:sysfs_bluetooth_writable:s0
