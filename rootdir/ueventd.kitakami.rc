@@ -35,6 +35,7 @@
 /dev/smdcnt_rev6          0640   radio      radio
 /dev/smdcnt_rev7          0640   radio      radio
 /dev/smdcnt_rev8          0640   radio      radio
+/dev/smem_log             0750   radio      radio
 /dev/smuxctl32            0640   radio      radio
 /dev/rmnet_mux_ctrl       0640   radio      radio
 /dev/video*               0660   system     camera
