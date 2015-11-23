@@ -10,6 +10,7 @@ Kitakami devices:
     Xperia Z4 Tablet Wi-Fi.....Karin_windy
     Xperia Z5..................Sumire
     Xperia Z5 Compact..........Suzuran
+    Xperia Z5 Premium..........Satsuki
 
 Build instructions
 http://developer.sonymobile.com/knowledge-base/open-source/open-devices/aosp-build-instructions/

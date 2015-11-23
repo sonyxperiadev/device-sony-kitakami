@@ -1,4 +1,4 @@
-ifeq ($(filter-out ivy karin karin_windy sumire suzuran,$(TARGET_DEVICE)),)
+ifeq ($(filter-out ivy karin karin_windy satsuki sumire suzuran,$(TARGET_DEVICE)),)
 
 LOCAL_PATH := $(call my-dir)
 
