@@ -119,6 +119,9 @@ on property:init.svc.bootanim=stopped
     write /sys/class/net/rmnet_ipa0/queues/rx-0/rps_cpus 0
     write /proc/sys/kernel/sched_small_task 30
 
+    # Change GPU initial power level
+    # from 305MHz(level 4) to 180MHz(level 5) for power savings
+    write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 5
     write /sys/class/kgsl/kgsl-3d0/devfreq/governor "msm-adreno-tz"
     write /dev/cpuctl/cpu.notify_on_migrate 1
 
