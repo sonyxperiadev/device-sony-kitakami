@@ -94,9 +94,9 @@
 
         <EncoderProfile quality="high" fileFormat="mp4" duration="30">
             <Video codec="h264"
-                   bitRate="42000000"
-                   width="3840"
-                   height="2160"
+                   bitRate="12000000"
+                   width="1280"
+                   height="720"
                    frameRate="30" />
             <Audio codec="aac"
                    bitRate="96000"
@@ -164,6 +164,7 @@
                    channels="1" />
         </EncoderProfile>
 
+        <!-- Disable 1080p+ resolution temporarily: it crashes the camera
         <EncoderProfile quality="1080p" fileFormat="mp4" duration="30">
             <Video codec="h264"
                    bitRate="17000000"
@@ -187,6 +188,7 @@
                    sampleRate="48000"
                    channels="1" />
         </EncoderProfile>
+        -->
 
         <EncoderProfile quality="timelapseqcif" fileFormat="mp4" duration="30">
             <Video codec="h264"
@@ -240,13 +242,16 @@
                    channels="1" />
         </EncoderProfile>
 
+        <!-- Disable 1080p+ resolution temporarily: it crashes the camera
         <EncoderProfile quality="timelapse1080p" fileFormat="mp4" duration="30">
             <Video codec="h264"
                    bitRate="17000000"
                    width="1920"
                    height="1080"
                    frameRate="30" />
+        -->
             <!-- audio setting is ignored -->
+        <!--
             <Audio codec="aac"
                    bitRate="96000"
                    sampleRate="48000"
@@ -259,12 +264,15 @@
                    width="3840"
                    height="2160"
                    frameRate="30" />
+        -->
             <!-- audio setting is ignored -->
+        <!--
             <Audio codec="aac"
                    bitRate="96000"
                    sampleRate="48000"
                    channels="1" />
         </EncoderProfile>
+        -->
 
         <!-- CAMCORDER_QUALITY_HIGH_SPEED_LOW/720P : 720p@240fps; 55.0 Mbps -->
         <EncoderProfile quality="highspeedlow" fileFormat="mp4" duration="30">
@@ -331,9 +339,9 @@
 
         <EncoderProfile quality="high" fileFormat="mp4" duration="30">
             <Video codec="h264"
-                   bitRate="17000000"
-                   width="1920"
-                   height="1080"
+                   bitRate="12000000"
+                   width="1280"
+                   height="720"
                    frameRate="30" />
             <Audio codec="aac"
                    bitRate="96000"
@@ -401,6 +409,7 @@
                    channels="1" />
         </EncoderProfile>
 
+        <!-- Disable 1080p+ resolution temporarily: it crashes the camera
         <EncoderProfile quality="1080p" fileFormat="mp4" duration="30">
             <Video codec="h264"
                    bitRate="17000000"
@@ -412,6 +421,7 @@
                    sampleRate="48000"
                    channels="1" />
         </EncoderProfile>
+	-->
 
         <EncoderProfile quality="timelapseqcif" fileFormat="mp4" duration="30">
             <Video codec="h264"
