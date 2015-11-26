@@ -101,6 +101,8 @@
         <!--
         Profiles for the back camera
         -->
+
+        <!-- Disable 1080p+ resolution temporarily: it crashes the camera
         <EncoderProfile quality="1080p" fileFormat="mp4" duration="60">
             <Video codec="h264"
                    bitRate="17500000"
@@ -113,6 +115,7 @@
                    sampleRate="48000"
                    channels="2" />
         </EncoderProfile>
+        -->
 
         <EncoderProfile quality="720p" fileFormat="mp4" duration="60">
             <Video codec="h264"
@@ -153,19 +156,22 @@
                    channels="1" />
         </EncoderProfile>
 
+        <!-- Disable 1080p+ resolution temporarily: it crashes the camera
         <EncoderProfile quality="timelapse1080p" fileFormat="mp4" duration="60">
             <Video codec="h264"
                    bitRate="17500000"
                    width="1920"
                    height="1080"
                    frameRate="30" />
-
+        -->
             <!-- audio setting is ignored -->
+        <!--
             <Audio codec="aac"
                    bitRate="156000"
                    sampleRate="48000"
                    channels="2" />
         </EncoderProfile>
+        -->
 
         <EncoderProfile quality="timelapse720p" fileFormat="mp4" duration="60">
             <Video codec="h264"
@@ -222,6 +228,7 @@
         Profiles for the front camera
         -->
 
+        <!-- Disable 1080p+ resolution temporarily: it crashes the camera
         <EncoderProfile quality="1080p" fileFormat="mp4" duration="60">
             <Video codec="h264"
                    bitRate="17500000"
@@ -234,6 +241,7 @@
                    sampleRate="48000"
                    channels="2" />
         </EncoderProfile>
+        -->
 
         <EncoderProfile quality="720p" fileFormat="mp4" duration="60">
             <Video codec="h264"
@@ -274,18 +282,22 @@
                    channels="1" />
         </EncoderProfile>
 
+        <!-- Disable 1080p+ resolution temporarily: it crashes the camera
         <EncoderProfile quality="timelapse1080p" fileFormat="mp4" duration="60">
             <Video codec="h264"
                    bitRate="17500000"
                    width="1920"
                    height="1080"
                    frameRate="30" />
+        -->
             <!-- audio setting is ignored -->
+        <!--
             <Audio codec="aac"
                    bitRate="156000"
                    sampleRate="48000"
                    channels="2" />
         </EncoderProfile>
+        -->
 
         <EncoderProfile quality="timelapse720p" fileFormat="mp4" duration="60">
             <Video codec="h264"
