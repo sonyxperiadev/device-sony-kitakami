@@ -3,6 +3,12 @@ rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
 rild.libargs=-d /dev/smd0
 ril.subscription.types=NV,RUIM
 
+# Added system property for PBM, support EF_ECC on APM
+persist.radio.wait_for_pbm=1
+
+# Set sms_ack timer
+persist.radio.mt_sms_ack=19
+
 # Default to LTE/GSM/WCDMA.
 ro.telephony.default_network=9
 
@@ -14,7 +20,7 @@ ro.data.large_tcp_window_size=true
 # Enable Power save functionality for modem
 persist.radio.add_power_save=1
 persist.radio.apm_sim_not_pwdn=1
-persist.radio.oem_socket=false
+persist.radio.oem_socket=true
 
 # Ringer
 ro.telephony.call_ring.multiple=false
