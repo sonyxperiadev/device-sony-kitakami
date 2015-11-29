@@ -73,3 +73,8 @@ wifi.interface=wlan0
 
 # Sensors
 ro.qti.sensors.dpc=true
+
+# Camera
+camera.disable_zsl_mode=0
+persist.camera.HAL3.enabled=1
+persist.camera.ois.disable=0
