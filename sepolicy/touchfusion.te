@@ -1,0 +1,2 @@
+allow touchfusion cgroup:dir { create add_name };
+allow touchfusion self:capability { setgid setuid };
