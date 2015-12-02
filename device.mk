@@ -94,6 +94,12 @@ PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/usr/keylayout/synaptics_dsx.kl:system/usr/keylayout/synaptics_dsx.kl \
     $(SONY_ROOT)/system/usr/keylayout/touch_fusion.kl:system/usr/keylayout/touch_fusion.kl
 
+# QMI
+PRODUCT_COPY_FILES += \
+    $(SONY_ROOT)/system/etc/data/dsi_config.xml:system/etc/data/dsi_config.xml \
+    $(SONY_ROOT)/system/etc/data/netmgr_config.xml:system/etc/data/netmgr_config.xml \
+    $(SONY_ROOT)/system/etc/data/qmi_config.xml:system/etc/data/qmi_config.xml
+
 # Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
