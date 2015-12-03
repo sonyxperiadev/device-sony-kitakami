@@ -342,6 +342,16 @@ service ta_qmi_service /system/vendor/bin/ta_qmi_service
     class main
     user root
 
+# SONY prop
+service sct_service /system/vendor/bin/sct_service
+    user root
+    class main
+
+# SONY prop
+service mlog_qmi_service /system/vendor/bin/mlog_qmi_service
+    user root
+    class main
+
 on property:ro.boot.baseband=apq
     setprop ro.radio.noril yes
     stop ril-daemon
@@ -379,15 +389,6 @@ service irsc_util /system/vendor/bin/irsc_util "/etc/sec_config"
     user root
     oneshot
 
-# QCOM prop
-service sct_service /system/vendor/bin/sct_service
-    user root
-    class main
-
-# QCOM prop
-service mlog_qmi_service /system/vendor/bin/mlog_qmi_service
-    user root
-    class main
 
 # Camera
 service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
