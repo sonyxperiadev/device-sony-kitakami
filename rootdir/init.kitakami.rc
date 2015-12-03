@@ -21,11 +21,9 @@ on early-init
 on init
     mkdir /tmp
     mount tmpfs tmpfs /tmp nosuid mode=0755,uid=0,gid=0
-
-    mkdir /dev/block/bootdevice
-    symlink /dev/block/platform/soc.0/by-name /dev/block/bootdevice/by-name
-
     symlink /dev/socket /tmp
+
+    symlink /dev/block/platform/soc.0/ /dev/block/bootdevice
 
     # See storage config details at http://source.android.com/tech/storage/
     mkdir /mnt/shell/emulated 0700 shell shell
@@ -139,7 +137,6 @@ on early-boot
     setrlimit 8 67108864 67108864
 
 on boot
-
     # Read ahead buffer
     write /sys/block/mmcblk0/queue/read_ahead_kb 2048
     write /sys/block/mmcblk1/queue/read_ahead_kb 2048
@@ -388,7 +385,6 @@ service irsc_util /system/vendor/bin/irsc_util "/etc/sec_config"
     class main
     user root
     oneshot
-
 
 # Camera
 service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
