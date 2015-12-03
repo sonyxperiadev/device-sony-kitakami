@@ -25,6 +25,11 @@ on init
 
     symlink /dev/block/platform/soc.0/ /dev/block/bootdevice
 
+    mkdir /firmware 0771 system system
+
+    # Set permissions for persist partition
+    mkdir /persist 0771 system system
+
     # See storage config details at http://source.android.com/tech/storage/
     mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /storage/emulated 0555 root root
@@ -67,6 +72,9 @@ on init
 on fs
     mount_all ./fstab.kitakami
     setprop ro.crypto.fuse_sdcard true
+
+    restorecon_recursive /persist
+
     write /sys/kernel/boot_adsp/boot 1
 
 on post-fs-data
@@ -81,10 +89,28 @@ on post-fs-data
     # Create directory for hostapd
     mkdir /data/hostapd 0770 system wifi
 
+    # create directory for scd
+    mkdir /dev/socket/scd 0755 system system
+    mkdir /data/scd 0755 system system
+
+    # Create directory for TZ Apps
+    mkdir /data/misc/qsee 0770 system system
+
     # Create directory used by audio subsystem
     mkdir /data/misc/audio 0770 audio audio
 
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
+
+    # Create directory for audio delta files
+    mkdir /data/misc/audio/acdbdata 0770 media audio
+    mkdir /data/misc/audio/acdbdata/delta 0770 media audio
+
+    mkdir /persist/data 0700 system system
+    mkdir /persist/data/sfs 0700 system system
+    mkdir /persist/data/tz 0700 system system
+    mkdir /data/usf 0700 system system
+    mkdir /data/misc/dts 0770 media audio
+    mkdir /data/persist 0770 persist_rw persist_rw
 
     # Mounting of persist is moved to 'on emmc-fs' and 'on fs' sections
     # We chown/chmod /persist again so because mount is run as root + defaults
@@ -119,9 +145,6 @@ on post-fs-data
     chmod 664 /data/system/sensors/settings
 
     chown system /dev/block/platform/soc.0/by-name
-
-    # Touch
-    mkdir /dev/socket/tfsw 0770 system system
 
     setprop vold.post_fs_data_done 1
 
@@ -212,6 +235,17 @@ on boot
     chmod 2770 /dev/socket/qmux_bluetooth
     mkdir /dev/socket/qmux_gps 0770 gps gps
     chmod 2770 /dev/socket/qmux_gps
+
+    # Allow access for CCID command/response timeout configuration
+    chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
+
+    # Mark the copy complete flag to not completed
+    write /data/misc/radio/copy_complete 0
+    chown radio radio /data/misc/radio/copy_complete
+    chmod 0660 /data/misc/radio/copy_complete
+
+    # Socket location for RIDL
+    mkdir /dev/socket/RIDL 2770 system system
 
     # Camera Recording
     mkdir /dev/video
@@ -329,25 +363,36 @@ on boot
 
 # SONY misc
 service tad_static /system/vendor/bin/tad_static /dev/block/platform/soc.0/by-name/TA 0,16
+    class core
     user root
     group root
     socket tad stream 0660 system system
-    class core
 
 # SONY misc
 service ta_qmi_service /system/vendor/bin/ta_qmi_service
-    class main
+    class core
     user root
 
 # SONY prop
 service sct_service /system/vendor/bin/sct_service
+    class core
     user root
-    class main
 
 # SONY prop
 service mlog_qmi_service /system/vendor/bin/mlog_qmi_service
+    class core
     user root
-    class main
+
+# QCOM prop
+service rmt_storage /system/vendor/bin/rmt_storage
+    class core
+    user root
+
+# QCOM prop
+service rfs_access /system/vendor/bin/rfs_access
+    class core
+    user root
+    group system net_raw
 
 on property:ro.boot.baseband=apq
     setprop ro.radio.noril yes
@@ -363,17 +408,6 @@ service qmuxd /system/vendor/bin/qmuxd
     user root
     group radio audio bluetooth gps diag
     disabled
-
-# QCOM prop
-service rmt_storage /system/vendor/bin/rmt_storage
-    class core
-    user root
-
-# QCOM prop
-service rfs_access /system/vendor/bin/rfs_access
-   class core
-   user root
-   group system net_raw
 
 # QCOM prop
 service netmgrd /system/vendor/bin/netmgrd
@@ -455,7 +489,6 @@ service iprenew_wlan0 /system/bin/dhcpcd -n
 
 service iprenew_p2p /system/bin/dhcpcd -n
     class late_start
-    class main
     disabled
     oneshot
 
@@ -465,6 +498,7 @@ service dhcpcd_bt-pan /system/bin/dhcpcd -BKLG
     oneshot
 
 service iprenew_bt-pan /system/bin/dhcpcd -n
+    class late_start
     disabled
     oneshot
 
