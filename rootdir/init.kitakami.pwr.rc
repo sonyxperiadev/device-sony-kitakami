@@ -79,20 +79,20 @@ on boot
     write /sys/devices/system/cpu/cpu7/online 1
 
 on property:init.svc.bootanim=stopped
-    # configure governor settings for little cluster
+    # Configure governor settings for little cluster
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load 1
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_migration_notif 0
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay "20000 750000:40000 800000:20000"
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 90
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate 20000
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 768000 
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 768000
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy 0
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads "85 780000:90"
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 40000
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 384000 
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 384000
 
-    # configure governor settings for big cluster
+    # Configure governor settings for big cluster
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/use_sched_load 1
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/use_migration_notif 0
@@ -115,7 +115,7 @@ on property:init.svc.bootanim=stopped
     # Never schedule these on the A57
     write /proc/sys/kernel/sched_upmigrate_min_nice 9
 
-    #enable rps static configuration
+    # Enable rps static configuration
     write /sys/class/net/rmnet_ipa0/queues/rx-0/rps_cpus 0
     write /proc/sys/kernel/sched_small_task 30
 
