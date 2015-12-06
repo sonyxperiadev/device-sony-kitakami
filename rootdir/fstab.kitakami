@@ -9,6 +9,7 @@
 /dev/block/bootdevice/by-name/recovery   /recovery          emmc    defaults                                                    defaults
 /dev/block/bootdevice/by-name/config     /persistent        emmc    defaults                                                    defaults
 /dev/block/bootdevice/by-name/modem      /firmware          vfat    defaults                                                    defaults
+/dev/block/bootdevice/by-name/persist    /persist           ext4    nosuid,nodev,barrier=1,data=ordered,nodelalloc,nomblk_io_submit,errors=panic wait,notrim
 
 /devices/soc.0/f98a4900.sdhci/mmc_host                       auto   vfat    nosuid,nodev                            voldmanaged=sdcard1:auto,encryptable=userdata
 /devices/soc.0/f9a55000.ehci/usb1                            auto   vfat    nosuid,nodev                            voldmanaged=uicc0:auto
