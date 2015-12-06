@@ -28,11 +28,11 @@ on init
 
     symlink /dev/block/platform/soc.0/ /dev/block/bootdevice
 
+    # Set permissions for firmware partition
     mkdir /firmware 0771 system system
 
     # Set permissions for persist partition
     mkdir /persist 0771 system system
-
 
     mkdir /dev/bus 0755 root root
     mkdir /dev/bus/usb 0755 root root
