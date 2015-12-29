@@ -152,6 +152,12 @@ on boot
     chown system system /sys/devices/virtual/input/clearpad/cover_win_right
     chown system system /sys/devices/virtual/input/clearpad/cover_win_top
 
+    # Tap to wake
+    chown system system /sys/devices/virtual/input/clearpad/wakeup_gesture
+    chown system system /sys/devices/virtual/input/maxim_sti/gesture_wakeup
+    chmod 0660 /sys/devices/virtual/input/clearpad/wakeup_gesture
+    chmod 0660 /sys/devices/virtual/input/maxim_sti/gesture_wakeup
+
     # Bluetooth device
     chown bluetooth net_bt_stack /dev/ttyHS0
     chmod 0600 /dev/ttyHS0
