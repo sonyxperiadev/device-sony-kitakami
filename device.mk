@@ -226,6 +226,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.bt.hci_transport=smd
 
+# For android_filesystem_config.h
+PRODUCT_PACKAGES += \
+   fs_config_files
+
 # Keyguard
 PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true
