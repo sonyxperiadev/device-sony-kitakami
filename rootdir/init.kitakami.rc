@@ -397,6 +397,47 @@ service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
     user camera
     group camera system inet input graphics
 
+service usf_tester /system/vendor/bin/usf_tester
+    user system
+    group system inet
+    disabled
+
+service usf_epos /system/vendor/bin/usf_epos
+    user system
+    group system inet
+    disabled
+
+service usf_gesture /system/vendor/bin/usf_gesture
+    user system
+    group system inet
+    disabled
+
+service usf_sync_gesture /system/vendor/bin/usf_sync_gesture
+    user system
+    group system inet
+    disabled
+
+service usf_p2p /system/vendor/bin/usf_p2p
+    user system
+    group system inet
+    disabled
+
+service usf_hovering /system/vendor/bin/usf_hovering
+    user system
+    group system inet
+    disabled
+
+service usf_proximity /system/vendor/bin/usf_proximity
+    user system
+    group system inet
+    disabled
+
+service usf-post-boot /system/bin/sh /system/etc/usf_post_boot.sh
+    class late_start
+    user root
+    disabled
+    oneshot
+
 service imsqmidaemon /system/vendor/bin/imsqmidaemon
     class main
     user system
@@ -413,6 +454,10 @@ service imsdatadaemon /system/vendor/bin/imsdatadaemon
 
 on property:sys.ims.QMI_DAEMON_STATUS=1
     start imsdatadaemon
+
+
+on property:init.svc.bootanim=stopped
+    start usf-post-boot
 
 # QCOM sensors
 service sensors /system/vendor/bin/sensors.qcom
