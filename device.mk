@@ -150,8 +150,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     com.android.nfc_extras \
     NfcNci \
-    Tag \
-    nfc_nci.msm8994
+    Tag
 
 # GPS
 PRODUCT_PACKAGES += \
