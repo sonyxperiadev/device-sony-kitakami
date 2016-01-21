@@ -99,6 +99,10 @@ on post-fs-data
     # Create directory used by audio subsystem
     mkdir /data/misc/audio 0770 audio audio
 
+    # Create a folder for audio delta files
+    mkdir /data/audio/acdbdata 0770 media audio
+    mkdir /data/audio/acdbdata/delta 0770 media audio
+
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
 
     # Create directory for audio delta files
