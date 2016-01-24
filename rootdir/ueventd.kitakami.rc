@@ -97,7 +97,6 @@
 /dev/msm_vidc_dec_sec     0660   system     audio
 /dev/msm_vidc_enc         0660   system     audio
 /dev/msm_rotator          0660   system     system
-/dev/adsprpc-smd          0664   system     system
 
 #permissions for audio
 /dev/audio_slimslave      0660   system     audio
