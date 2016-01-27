@@ -392,12 +392,6 @@ service rmt_storage /system/vendor/bin/rmt_storage
     class core
     user root
 
-# QCOM prop
-service rfs_access /system/vendor/bin/rfs_access
-    class core
-    user root
-    group system net_raw
-
 on property:ro.boot.baseband=apq
     setprop ro.radio.noril yes
     stop ril-daemon
