@@ -20,7 +20,7 @@ on early-init
 
 on init
     # BoringSSL hacks
-    export LD_PRELOAD "libboringssl-compat.so"
+    #export LD_PRELOAD "libboringssl-compat.so"
 
     mkdir /tmp
     mount tmpfs tmpfs /tmp nosuid mode=0755,uid=0,gid=0
