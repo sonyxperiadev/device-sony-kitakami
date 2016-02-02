@@ -103,6 +103,9 @@
 /dev/rfkill                                         0660 bluetooth net_bt_stack
 /dev/ttyHS0                                         0660 bluetooth net_bt_stack
 
+# Ultrasound device
+/dev/usf1                 0660   system     system
+
 # Sensors
 /sys/devices/virtual/switch/dock        state       0660 system system
 /sys/devices/virtual/switch/hdmi        state       0660 system system
