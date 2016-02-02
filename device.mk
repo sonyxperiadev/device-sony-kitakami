@@ -12,21 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SONY_ROOT = device/sony/kitakami/rootdir
-
 SOMC_PLATFORM := kitakami
 
-DEVICE_PACKAGE_OVERLAYS += \
-    device/sony/kitakami/overlay
+SONY_ROOT = device/sony/kitakami/rootdir
 
-PRODUCT_COPY_FILES += \
-    $(SONY_ROOT)/system/etc/sec_config:system/etc/sec_config \
-    $(SONY_ROOT)/system/etc/gps.conf:system/etc/gps.conf \
-    $(SONY_ROOT)/system/usr/idc/clearpad.idc:system/usr/idc/clearpad.idc \
-    $(SONY_ROOT)/system/usr/idc/touch_fusion.idc:system/usr/idc/touch_fusion.idc \
-    $(SONY_ROOT)/system/etc/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf \
-    $(SONY_ROOT)/system/etc/sensors_settings:system/etc/sensors_settings
+DEVICE_PACKAGE_OVERLAYS += device/sony/kitakami/overlay
 
+# Init
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/fstab.kitakami:root/fstab.kitakami \
     $(SONY_ROOT)/init.recovery.kitakami.rc:root/init.recovery.kitakami.rc \
@@ -35,25 +27,23 @@ PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/init.kitakami.pwr.rc:root/init.kitakami.pwr.rc \
     $(SONY_ROOT)/ueventd.kitakami.rc:root/ueventd.kitakami.rc
 
+# Media
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/etc/aanc_tuning_mixer.txt:system/etc/aanc_tuning_mixer.txt \
     $(SONY_ROOT)/system/etc/audio_effects.conf:system/vendor/etc/audio_effects.conf \
-    $(SONY_ROOT)/system/etc/media_codecs.xml:system/etc/media_codecs.xml \
-    $(SONY_ROOT)/system/etc/media_profiles.xml:system/etc/media_profiles.xml \
     $(SONY_ROOT)/system/etc/audio_platform_info.xml:system/etc/audio_platform_info.xml \
-    $(SONY_ROOT)/system/etc/audio_platform_info_i2s.xml:system/etc/audio_platform_info_i2s.xml
+    $(SONY_ROOT)/system/etc/audio_platform_info_i2s.xml:system/etc/audio_platform_info_i2s.xml \
+    $(SONY_ROOT)/system/etc/media_codecs.xml:system/etc/media_codecs.xml \
+    $(SONY_ROOT)/system/etc/media_profiles.xml:system/etc/media_profiles.xml
 
-# Device Specific Hardware
+# Broadcom BT
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml \
-    frameworks/native/data/etc/android.hardware.sensor.barometer.xml:system/etc/permissions/android.hardware.sensor.barometer.xml
+    $(SONY_ROOT)/system/etc/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
 
-# NFC
+# IDC
 PRODUCT_COPY_FILES += \
-    $(SONY_ROOT)/system/etc/nfcee_access.xml:system/etc/nfcee_access.xml \
-    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
-    frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
-    frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml
+    $(SONY_ROOT)/system/usr/idc/clearpad.idc:system/usr/idc/clearpad.idc \
+    $(SONY_ROOT)/system/usr/idc/touch_fusion.idc:system/usr/idc/touch_fusion.idc
 
 # Keylayout
 PRODUCT_COPY_FILES += \
@@ -70,6 +60,11 @@ PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/etc/data/netmgr_config.xml:system/etc/data/netmgr_config.xml \
     $(SONY_ROOT)/system/etc/data/qmi_config.xml:system/etc/data/qmi_config.xml
 
+# Device Specific Hardware
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml \
+    frameworks/native/data/etc/android.hardware.sensor.barometer.xml:system/etc/permissions/android.hardware.sensor.barometer.xml \
+    frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml
 
 # NFC packages
 #PRODUCT_PACKAGES += \
