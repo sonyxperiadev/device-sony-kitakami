@@ -16,8 +16,6 @@ SOMC_PLATFORM := kitakami
 
 SONY_ROOT = device/sony/kitakami/rootdir
 
-DEVICE_PACKAGE_OVERLAYS += device/sony/kitakami/overlay
-
 # Init
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/fstab.kitakami:root/fstab.kitakami \
