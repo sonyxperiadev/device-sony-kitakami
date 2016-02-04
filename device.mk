@@ -16,15 +16,6 @@ SOMC_PLATFORM := kitakami
 
 SONY_ROOT = device/sony/kitakami/rootdir
 
-# Init
-PRODUCT_COPY_FILES += \
-    $(SONY_ROOT)/fstab.kitakami:root/fstab.kitakami \
-    $(SONY_ROOT)/init.recovery.kitakami.rc:root/init.recovery.kitakami.rc \
-    $(SONY_ROOT)/init.kitakami.rc:root/init.kitakami.rc \
-    $(SONY_ROOT)/init.kitakami.usb.rc:root/init.kitakami.usb.rc \
-    $(SONY_ROOT)/init.kitakami.pwr.rc:root/init.kitakami.pwr.rc \
-    $(SONY_ROOT)/ueventd.kitakami.rc:root/ueventd.kitakami.rc
-
 # Media
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/etc/aanc_tuning_mixer.txt:system/etc/aanc_tuning_mixer.txt \
@@ -64,6 +55,11 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.barometer.xml:system/etc/permissions/android.hardware.sensor.barometer.xml \
     frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml
 
+# Platform Init
+PRODUCT_PACKAGES += \
+    fstab.kitakami \
+    init.kitakami.pwr
+
 # NFC packages
 #PRODUCT_PACKAGES += \
 #    com.android.nfc_extras \
@@ -92,14 +88,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     keystore.msm8994
-
-# Lights
-PRODUCT_PACKAGES += \
-    lights.kitakami
-
-# Simple PowerHAL
-PRODUCT_PACKAGES += \
-    power.kitakami
 
 # RILD
 PRODUCT_PROPERTY_OVERRIDES += \
