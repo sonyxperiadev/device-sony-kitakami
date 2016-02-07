@@ -18,7 +18,7 @@ $(call inherit-product, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
 
 SOMC_PLATFORM := kitakami
 
-SONY_ROOT = device/sony/kitakami/rootdir
+SONY_ROOT := device/sony/kitakami/rootdir
 
 # Media
 PRODUCT_COPY_FILES += \
