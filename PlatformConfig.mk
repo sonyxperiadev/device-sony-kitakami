@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include device/sony/common/CommonConfig.mk
 
 TARGET_BOARD_PLATFORM := msm8994
 
@@ -80,3 +79,5 @@ TARGET_PER_MGR_ENABLED := true
 BOARD_SEPOLICY_DIRS += device/sony/kitakami/sepolicy
 
 BOARD_SEPOLICY_UNION += \
+
+include device/sony/common/CommonConfig.mk
