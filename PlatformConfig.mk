@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include device/sony/common/CommonConfig.mk
 
 TARGET_BOARD_PLATFORM := msm8994
 
@@ -79,3 +78,5 @@ NFC_NXP_CHIP_TYPE := PN547C2
 
 # SELinux
 BOARD_SEPOLICY_DIRS += device/sony/kitakami/sepolicy
+
+include device/sony/common/CommonConfig.mk
