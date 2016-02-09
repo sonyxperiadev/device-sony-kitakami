@@ -75,6 +75,9 @@ BOARD_NFC_HAL_SUFFIX := $(TARGET_BOARD_PLATFORM)
 # RIL
 TARGET_PER_MGR_ENABLED := true
 
+# Disable Dexpreopt
+WITH_DEXPREOPT := false
+
 # SELinux
 BOARD_SEPOLICY_DIRS += device/sony/kitakami/sepolicy
 
