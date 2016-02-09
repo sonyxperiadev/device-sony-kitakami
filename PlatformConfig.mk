@@ -76,6 +76,9 @@ TARGET_PER_MGR_ENABLED := true
 # NFC
 NFC_NXP_CHIP_TYPE := PN547C2
 
+# Disable Dexpreopt
+WITH_DEXPREOPT := false
+
 # SELinux
 BOARD_SEPOLICY_DIRS += device/sony/kitakami/sepolicy
 
