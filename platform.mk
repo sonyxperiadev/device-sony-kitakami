@@ -60,8 +60,10 @@ PRODUCT_COPY_FILES += \
 
 # Platform Init
 PRODUCT_PACKAGES += \
-    fstab.kitakami \
-    init.kitakami.pwr
+    fstab.kitakami
+
+PRODUCT_COPY_FILES += \
+   $(SONY_ROOT)/system/bin/init.kitakami.power.sh:system/bin/init.kitakami.power.sh
 
 # NFC packages
 PRODUCT_PACKAGES += \

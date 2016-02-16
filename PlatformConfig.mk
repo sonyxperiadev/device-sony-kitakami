@@ -70,6 +70,9 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUEDROID_VENDOR_CONF := device/sony/kitakami/bluetooth/vnd_generic.txt
 
+# Power
+TARGET_USES_INTERACTION_BOOST := true
+
 # RIL
 TARGET_PER_MGR_ENABLED := true
 

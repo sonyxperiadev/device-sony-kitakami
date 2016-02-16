@@ -14,7 +14,6 @@
 
 import init.common.rc
 import init.common.usb.rc
-import init.kitakami.pwr.rc
 
 on init
     symlink /dev/block/platform/soc.0/f9824900.sdhci /dev/block/bootdevice
@@ -25,6 +24,14 @@ on fs
     write /sys/kernel/boot_adsp/boot 1
 
 on boot
+    exec - root system -- /system/bin/init.kitakami.power.sh
+
+    # update foreground cpuset now that processors are up
+    write /dev/cpuset/foreground/cpus 0-7
+    write /dev/cpuset/foreground/boost/cpus 4-7
+    write /dev/cpuset/background/cpus 0
+    write /dev/cpuset/system-background/cpus 0-3
+
     # Cover mode
     chown system system /sys/devices/virtual/input/clearpad/cover_mode_enabled
     chown system system /sys/devices/virtual/input/clearpad/cover_win_bottom
@@ -53,11 +60,22 @@ on boot
     # Socket location for RIDL
     mkdir /dev/socket/RIDL 2770 system system
 
-    # Update foreground cpuset now that processors are up
-    write /dev/cpuset/foreground/cpus 0-7
-    write /dev/cpuset/foreground/boost/cpus 4-7
-    write /dev/cpuset/background/cpus 0
-    write /dev/cpuset/system-background/cpus 0-3
+on charger
+    #set cpu4,5 online first, or they can't get into low power consumption mode
+    write /sys/devices/system/cpu/cpu4/online 1
+    write /sys/devices/system/cpu/cpu5/online 1
+    #low power governing
+    write /sys/devices/soc.0/qcom,bcl.60/mode disable
+    write /sys/devices/soc.0/qcom,bcl.60/hotplug_mask 0
+    write /sys/devices/soc.0/qcom,bcl.60/hotplug_soc_mask 0
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor powersave
+    write /sys/devices/system/cpu/cpu1/online 0
+    write /sys/devices/system/cpu/cpu2/online 0
+    write /sys/devices/system/cpu/cpu3/online 0
+    write /sys/devices/system/cpu/cpu4/online 0
+    write /sys/devices/system/cpu/cpu5/online 0
+    write /sys/devices/system/cpu/cpu6/online 0
+    write /sys/devices/system/cpu/cpu7/online 0
 
 # OSS WLAN and BT MAC setup
 service macaddrsetup /system/bin/macaddrsetup
@@ -121,3 +139,7 @@ on property:init.svc.per_mgr=running
 
 on property:sys.shutdown.requested=*
     stop per_proxy
+
+on property:sys.boot_completed=1
+    # allow CPUs to go in deeper idle state than C0
+    write /sys/module/lpm_levels/parameters/sleep_disabled 0
