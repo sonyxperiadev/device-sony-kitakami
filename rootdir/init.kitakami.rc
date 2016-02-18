@@ -106,6 +106,12 @@ service per_proxy /system/vendor/bin/pm-proxy
     group system net_raw
     disabled
 
+# Fingerprint service
+service fingerprintd /system/bin/fingerprintd
+    class late_start
+    user system
+    group input
+
 on property:vold.post_fs_data_done=1
     # Generate Bluetooth MAC address file only when /data is ready
     start macaddrsetup
