@@ -128,6 +128,8 @@
 /sys/devices/soc.0/03-qcom,leds-d000/leds/led:* ramp_step_ms            0664 system system
 /sys/devices/soc.0/03-qcom,leds-d800/leds/wled:backlight max_brightness 0664 system system
 /sys/devices/soc.0/03-qcom,leds-d800/leds/wled:backlight brightness     0664 system system
+/sys/class/leds/lcd-backlight/max_brightness                            0644 root system
+/sys/class/leds/lcd-backlight/brightness                                0664 system system
 
 /sys/devices/virtual/graphics/fb1/avi_itc             0664 system graphics
 /sys/devices/virtual/graphics/fb1/avi_cn0_1           0664 system graphics
