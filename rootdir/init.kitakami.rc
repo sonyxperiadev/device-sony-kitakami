@@ -16,9 +16,6 @@ import init.common.rc
 import init.common.usb.rc
 import init.kitakami.pwr.rc
 
-on init
-    symlink /dev/block/platform/soc.0/f9824900.sdhci /dev/block/bootdevice
-
 on fs
     mount_all ./fstab.kitakami
     restorecon_recursive /persist
