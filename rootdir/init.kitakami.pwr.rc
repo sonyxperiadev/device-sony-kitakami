@@ -81,6 +81,40 @@ on boot
 on property:init.svc.bootanim=stopped
     # Configure governor settings for little cluster
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
+
+    # Userspce control of little cluster governor
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/align_windows
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_migration_notif
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load
+    chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
+    chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/align_windows
+    chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost
+    chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse
+    chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration
+    chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
+    chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
+    chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
+    chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis
+    chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
+    chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
+    chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
+    chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
+    chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_migration_notif
+    chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load
+
+    # Configure governor settings for little cluster
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load 1
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_migration_notif 0
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay "20000 750000:40000 800000:20000"
@@ -104,6 +138,17 @@ on property:init.svc.bootanim=stopped
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads "85 780000:90"
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time 40000
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 384000
+
+    # Userspace control of cpuquiet settings
+    chown system system /sys/devices/system/cpu/cpuquiet/nr_min_cpus
+    chown system system /sys/devices/system/cpu/cpuquiet/nr_power_max_cpus
+    chown system system /sys/devices/system/cpu/cpuquiet/nr_thermal_max_cpus
+    chmod 0664 /sys/devices/system/cpu/cpuquiet/nr_min_cpus
+    chmod 0664 /sys/devices/system/cpu/cpuquiet/nr_power_max_cpus
+    chmod 0664 /sys/devices/system/cpu/cpuquiet/nr_thermal_max_cpus
+    write /sys/devices/system/cpu/cpuquiet/nr_min_cpus 1
+    write /sys/devices/system/cpu/cpuquiet/nr_power_max_cpus 8
+    write /sys/devices/system/cpu/cpuquiet/nr_thermal_max_cpus 8
 
     # Enable thermal
     write /sys/module/msm_thermal/core_control/enabled 1
