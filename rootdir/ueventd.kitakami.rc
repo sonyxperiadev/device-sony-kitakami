@@ -134,6 +134,7 @@
 # Thermanager
 /sys/module/msm_performance/parameters/cpu_max_freq   0664 system system
 /sys/module/msm_performance/parameters/cpu_min_freq   0664 system system
+/sys/module/msm_performance/parameters/max_cpus       0664 system system
 
 /sys/devices/virtual/graphics/fb1/avi_itc             0664 system graphics
 /sys/devices/virtual/graphics/fb1/avi_cn0_1           0664 system graphics
