@@ -45,23 +45,15 @@ on charger
     # Enable thermal
     write /sys/module/msm_thermal/core_control/enabled 1
 
-on class_start:late_start
+on boot
     # Disable thermal
     write /sys/module/msm_thermal/core_control/enabled 0
-
-    # ensure at most one A57 is online when thermal hotplug is disabled
-    write /sys/devices/system/cpu/cpu5/online 0
-    write /sys/devices/system/cpu/cpu6/online 0
-    write /sys/devices/system/cpu/cpu7/online 0
 
     # Allow throttling cpus as a cluster
     # This is to compensate for the lack of perfd and libqti-perf-client.so
     write /sys/module/msm_performance/parameters/num_clusters 2
     write /sys/module/msm_performance/parameters/managed_cpus "0-3"
     write /sys/module/msm_performance/parameters/managed_cpus "4-7"
-
-    # Limit A57 max freq from msm_perf module in case CPU 4 is offline
-    write /sys/module/msm_performance/parameters/cpu_max_freq "4:960000 5:960000 6:960000 7:960000"
 
     # disable thermal bcl hotplug
     write /sys/module/msm_thermal/core_control/enabled 0
@@ -74,8 +66,47 @@ on class_start:late_start
     write /sys/devices/soc.0/qcom,bcl.61/hotplug_soc_mask 0
     write /sys/devices/soc.0/qcom,bcl.61/mode "enable"
 
+    # ensure at most one A57 is online when thermal hotplug is disabled
+    write /sys/devices/system/cpu/cpu5/online 0
+    write /sys/devices/system/cpu/cpu6/online 0
+    write /sys/devices/system/cpu/cpu7/online 0
+
+    # Limit A57 max freq from msm_perf module in case CPU 4 is offline
+    write /sys/module/msm_performance/parameters/cpu_max_freq "4:960000 5:960000 6:960000 7:960000"
+
     # Configure governor settings for little cluster
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load 1
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_migration_notif 1
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay "20000 750000:40000 800000:20000"
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 90
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate 20000
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 768000
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy 0
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads "85 780000:90"
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 40000
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis 80000
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 384000
+
+    # Configure governor settings for big cluster
+    write /sys/devices/system/cpu/cpu4/online 1
+    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor "interactive"
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/use_sched_load 1
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/use_migration_notif 1
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay "20000 750000:40000 800000:20000"
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load 90
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate 20000
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq 768000
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/io_is_busy 0
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads "85 780000:90"
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time 40000
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/max_freq_hysteresis 80000
+    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 384000
+
+    # plugin remaining A57s
+    write /sys/devices/system/cpu/cpu5/online 1
+    write /sys/devices/system/cpu/cpu6/online 1
+    write /sys/devices/system/cpu/cpu7/online 1
 
     # Userspce control of little cluster governor
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
@@ -109,34 +140,6 @@ on class_start:late_start
     chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_migration_notif
     chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load
 
-    # Configure governor settings for little cluster
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load 1
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_migration_notif 1
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay "20000 750000:40000 800000:20000"
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 90
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate 20000
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 768000
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy 0
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads "85 780000:90"
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 40000
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis 80000
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 384000
-
-    # Configure governor settings for big cluster
-    write /sys/devices/system/cpu/cpu4/online 1
-    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor "interactive"
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/use_sched_load 1
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/use_migration_notif 1
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay "20000 750000:40000 800000:20000"
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load 90
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate 20000
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq 768000
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/io_is_busy 0
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads "85 780000:90"
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time 40000
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/max_freq_hysteresis 80000
-    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 384000
-
     # Userspace control of cpuquiet settings
     chown system system /sys/devices/system/cpu/cpuquiet/nr_min_cpus
     chown system system /sys/devices/system/cpu/cpuquiet/nr_power_max_cpus
@@ -147,6 +150,33 @@ on class_start:late_start
     write /sys/devices/system/cpu/cpuquiet/nr_min_cpus 1
     write /sys/devices/system/cpu/cpuquiet/nr_power_max_cpus 8
     write /sys/devices/system/cpu/cpuquiet/nr_thermal_max_cpus 8
+
+    # Restore CPU 4 max freq from msm_performance
+    write /sys/module/msm_performance/parameters/cpu_max_freq "4:4294967295 5:4294967295 6:4294967295 7:4294967295"
+
+    # enable LPM
+    write /sys/module/lpm_levels/parameters/sleep_disabled 0
+
+    # input boost configuration
+    write /sys/module/cpu_boost/parameters/input_boost_freq 1248000
+    write /sys/module/cpu_boost/parameters/input_boost_ms 40
+
+    # Setting b.L scheduler parameters
+    write /proc/sys/kernel/sched_migration_fixup 1
+    write /proc/sys/kernel/sched_small_task 30
+    write /proc/sys/kernel/sched_upmigrate 99
+    write /proc/sys/kernel/sched_downmigrate 85
+    write /proc/sys/kernel/sched_freq_inc_notify 400000
+    write /proc/sys/kernel/sched_freq_dec_notify 400000
+
+    # Android background processes are set to nice 10
+    # Never schedule these on the A57
+    write /proc/sys/kernel/sched_upmigrate_min_nice 9
+
+    write /sys/class/devfreq/qcom,cpubw.32/governor "bw_hwmon"
+
+    # Disable sched_boost
+    write /proc/sys/kernel/sched_boost 0
 
     # re-enable thermal and BCL hotplug
     write /sys/module/msm_thermal/core_control/enabled 1
@@ -159,33 +189,12 @@ on class_start:late_start
     write /sys/devices/soc.0/qcom,bcl.61/hotplug_soc_mask 240
     write /sys/devices/soc.0/qcom,bcl.61/mode "enable"
 
-    # enable LPM
-    write /sys/module/lpm_levels/parameters/sleep_disabled 0
-
-    # Restore CPU 4 max freq from msm_performance
-    write /sys/module/msm_performance/parameters/cpu_max_freq "4:4294967295 5:4294967295 6:4294967295 7:4294967295"
-
-    # input boost configuration
-    write /sys/module/cpu_boost/parameters/input_boost_freq 1248000
-    write /sys/module/cpu_boost/parameters/input_boost_ms 40
-
-    # Setting b.L scheduler parameters
-    write /proc/sys/kernel/sched_migration_fixup 1
-    write /proc/sys/kernel/sched_small_task 30
-    write /proc/sys/kernel/sched_mostly_idle_load 20
-    write /proc/sys/kernel/sched_mostly_idle_nr_run 3
-    write /proc/sys/kernel/sched_upmigrate 99
-    write /proc/sys/kernel/sched_downmigrate 85
-    write /proc/sys/kernel/sched_freq_inc_notify 400000
-    write /proc/sys/kernel/sched_freq_dec_notify 400000
-
-    # Android background processes are set to nice 10
-    # Never schedule these on the A57
-    write /proc/sys/kernel/sched_upmigrate_min_nice 9
-
     # Enable rps static configuration
     write /sys/class/net/rmnet_ipa0/queues/rx-0/rps_cpus 0
     write /proc/sys/kernel/sched_small_task 30
 
+    # change GPU initial power level from 305MHz(level 4) to 180MHz(level 5) for power savings
     write /sys/class/kgsl/kgsl-3d0/devfreq/governor "msm-adreno-tz"
+    write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 5
+
     write /dev/cpuctl/cpu.notify_on_migrate 1
