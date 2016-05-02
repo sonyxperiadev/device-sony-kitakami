@@ -20,6 +20,10 @@ SOMC_PLATFORM := kitakami
 
 SONY_ROOT := device/sony/kitakami/rootdir
 
+# Common Overlay
+DEVICE_PACKAGE_OVERLAYS += \
+    device/sony/kitakami/overlay
+
 # Media
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/etc/aanc_tuning_mixer.txt:system/etc/aanc_tuning_mixer.txt \
