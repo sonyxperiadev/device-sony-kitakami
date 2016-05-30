@@ -14,9 +14,15 @@
 
 on init
     # cpuquiet rqbalance permissions
+    chown system system /sys/devices/system/cpu/cpuquiet/nr_min_cpus
+    chown system system /sys/devices/system/cpu/cpuquiet/nr_power_max_cpus
+    chown system system /sys/devices/system/cpu/cpuquiet/nr_thermal_max_cpus
     chown system system /sys/devices/system/cpu/cpuquiet/rqbalance/balance_level
     chown system system /sys/devices/system/cpu/cpuquiet/rqbalance/nr_run_thresholds
     chown system system /sys/devices/system/cpu/cpuquiet/rqbalance/nr_down_run_thresholds
+    chmod 0660 /sys/devices/system/cpu/cpuquiet/nr_min_cpus
+    chmod 0660 /sys/devices/system/cpu/cpuquiet/nr_power_max_cpus
+    chmod 0660 /sys/devices/system/cpu/cpuquiet/nr_thermal_max_cpus
     chmod 0660 /sys/devices/system/cpu/cpuquiet/rqbalance/balance_level
     chmod 0660 /sys/devices/system/cpu/cpuquiet/rqbalance/nr_run_thresholds
     chmod 0660 /sys/devices/system/cpu/cpuquiet/rqbalance/nr_down_run_thresholds
@@ -156,9 +162,6 @@ on boot
     chmod 0664 /sys/devices/system/cpu/cpuquiet/nr_min_cpus
     chmod 0664 /sys/devices/system/cpu/cpuquiet/nr_power_max_cpus
     chmod 0664 /sys/devices/system/cpu/cpuquiet/nr_thermal_max_cpus
-    write /sys/devices/system/cpu/cpuquiet/nr_min_cpus 1
-    write /sys/devices/system/cpu/cpuquiet/nr_power_max_cpus 8
-    write /sys/devices/system/cpu/cpuquiet/nr_thermal_max_cpus 8
 
     # Restore CPU 4 max freq from msm_performance
     write /sys/module/msm_performance/parameters/cpu_max_freq "4:4294967295 5:4294967295 6:4294967295 7:4294967295"
