@@ -69,6 +69,9 @@ on boot
     write /dev/cpuset/background/cpus 0
     write /dev/cpuset/system-background/cpus 0-3
 
+    # Symlink for compability
+    symlink /dev/pn54x /dev/pn547
+
 # OSS WLAN and BT MAC setup
 service macaddrsetup /system/bin/macaddrsetup
     user root
