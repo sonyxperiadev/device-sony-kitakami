@@ -122,15 +122,15 @@
 /sys/devices/f9928000.i2c/i2c-6/6-0028  send_cmd    0200 nfc nfc
 
 # LED
-/sys/devices/soc.0/03-qcom,leds-d000/leds/led:* max_brightness          0664 system system
-/sys/devices/soc.0/03-qcom,leds-d000/leds/led:* brightness              0664 system system
-/sys/devices/soc.0/03-qcom,leds-d000/leds/led:* blink                   0664 system system
-/sys/devices/soc.0/03-qcom,leds-d000/leds/led:* duty_pcts               0664 system system
-/sys/devices/soc.0/03-qcom,leds-d000/leds/led:* ramp_step_ms            0664 system system
-/sys/devices/soc.0/03-qcom,leds-d800/leds/wled:backlight max_brightness 0664 system system
-/sys/devices/soc.0/03-qcom,leds-d800/leds/wled:backlight brightness     0664 system system
-/sys/class/leds/lcd-backlight/max_brightness                            0644 root system
-/sys/class/leds/lcd-backlight/brightness                                0664 system system
+/sys/devices/soc.0/03-qcom,leds-0x000000000000d000/leds/led:* max_brightness          0664 system system
+/sys/devices/soc.0/03-qcom,leds-0x000000000000d000/leds/led:* brightness              0664 system system
+/sys/devices/soc.0/03-qcom,leds-0x000000000000d000/leds/led:* blink                   0664 system system
+/sys/devices/soc.0/03-qcom,leds-0x000000000000d000/leds/led:* duty_pcts               0664 system system
+/sys/devices/soc.0/03-qcom,leds-0x000000000000d000/leds/led:* ramp_step_ms            0664 system system
+/sys/devices/soc.0/03-qcom,leds-0x000000000000d800/leds/wled:backlight max_brightness 0664 system system
+/sys/devices/soc.0/03-qcom,leds-0x000000000000d800/leds/wled:backlight brightness     0664 system system
+/sys/class/leds/lcd-backlight/max_brightness                                          0644 root system
+/sys/class/leds/lcd-backlight/brightness                                              0664 system system
 
 # Thermanager
 /sys/module/msm_performance/parameters/cpu_max_freq   0664 system system
