@@ -17,6 +17,33 @@
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
 
+#include <cutils/properties.h>
+#include <string.h>
+
+inline const char* getBTDefaultName()
+{
+    char device[PROPERTY_VALUE_MAX];
+    property_get("ro.boot.hardware", device, "");
+
+    if (!strcmp("ivy", device)) {
+        return "Xperia Z3+";
+    } else if (!strcmp("karin", device)) {
+        return "Xperia Z4 Tablet";
+    } else if (!strcmp("karin_windy", device)) {
+        return "Xperia Z4 Tablet";
+    } else if (!strcmp("sumire", device)) {
+        return "Xperia Z5";
+    } else if (!strcmp("suzuran", device)) {
+        return "Xperia Z5 Compact";
+    } else if (!strcmp("satsuki", device)) {
+        return "Xperia Z5 Premium";
+    }
+
+    return "Xperia";
+}
+
+#define BTM_DEF_LOCAL_NAME getBTDefaultName()
+
 /* #define BTA_AV_CO_CP_SCMS_T   TRUE */
 #define SDP_AVRCP_1_5   FALSE
 
