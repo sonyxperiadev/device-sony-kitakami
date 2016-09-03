@@ -111,6 +111,19 @@
 /sys/devices/virtual/switch/hdmi_audio  state       0660 system system
 /sys/devices/virtual/switch/wfd         state       0660 system system
 
+# AD7146
+/sys/devices/virtual/cap_sensor/ad7146 dac_calibrate  0660 system system
+/sys/devices/virtual/cap_sensor/ad7146 dac_mid_val    0660 system system
+/sys/devices/virtual/cap_sensor/ad7146 force_calib    0220 system system
+/sys/devices/virtual/cap_sensor/ad7146 obj_detect     0660 system system
+/sys/devices/virtual/cap_sensor/ad7146 pad_set        0220 system system
+/sys/devices/virtual/cap_sensor/ad7146 pad_num        0220 system system
+/sys/devices/virtual/cap_sensor/ad7146 pad_data       0440 system system
+/sys/devices/virtual/cap_sensor/ad7146 pad_offset     0660 system system
+/sys/devices/virtual/cap_sensor/ad7146 sw_updata      0440 system system
+/sys/devices/virtual/switch/ad7146     state          0660 system system
+/sys/devices/virtual/switch/ad7146_*   state          0660 system system
+
 # NFC
 /dev/nfc-nci                                        0660 nfc nfc
 /dev/pn544                                          0660 nfc nfc
