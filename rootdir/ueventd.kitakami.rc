@@ -154,3 +154,16 @@
 /sys/devices/system/cpu/cpuquiet/rqbalance/balance_level             0660 system system
 /sys/devices/system/cpu/cpuquiet/rqbalance/nr_run_thresholds         0660 system system
 /sys/devices/system/cpu/cpuquiet/rqbalance/nr_down_run_thresholds    0660 system system
+
+# Proximity
+/sys/devices/virtual/cap_sensor/ad7146              dac_calibrate  0660    system   system
+/sys/devices/virtual/cap_sensor/ad7146              dac_mid_val    0660    system   system
+/sys/devices/virtual/cap_sensor/ad7146              force_calib    0220    system   system
+/sys/devices/virtual/cap_sensor/ad7146              obj_detect     0660    system   system
+/sys/devices/virtual/cap_sensor/ad7146              pad_set        0220    system   system
+/sys/devices/virtual/cap_sensor/ad7146              pad_num        0220    system   system
+/sys/devices/virtual/cap_sensor/ad7146              pad_data       0440    system   system
+/sys/devices/virtual/cap_sensor/ad7146              pad_offset     0660    system   system
+/sys/devices/virtual/cap_sensor/ad7146              sw_updata      0440    system   system
+/sys/devices/virtual/switch/ad7146                  state          0660    system   system
+/sys/devices/virtual/switch/ad7146_*                state          0660    system   system

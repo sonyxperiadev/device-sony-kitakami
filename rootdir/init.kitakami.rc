@@ -116,6 +116,16 @@ service per_proxy /system/vendor/bin/pm-proxy
     group system net_raw
     disabled
 
+# Sensor
+service pad_controller /system/vendor/bin/pad_controller
+    class main
+    user system
+    group system radio
+    disabled
+
+on property:ro.hardware=karin
+    enable pad_controller
+
 # Fingerprint service
 service fingerprintd /system/bin/fingerprintd
     class late_start
