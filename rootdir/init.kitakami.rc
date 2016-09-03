@@ -122,6 +122,12 @@ service fingerprintd /system/bin/fingerprintd
     user system
     group input
 
+# AD7146 Proximity Sensor
+service pad_controller /system/vendor/bin/pad_controller
+    class late_start
+    user system
+    group system radio
+
 service msm_irqbalance /system/vendor/bin/msm_irqbalance -f /system/etc/msm_irqbalance.conf
     socket msm_irqbalance seqpacket 660 root system
     class core

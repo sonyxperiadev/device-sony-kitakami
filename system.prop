@@ -13,3 +13,9 @@ cpuquiet.normal.max_cpus=8
 rqbalance.normal.balance_level=40
 rqbalance.normal.up_threshold=100 300 400 500 525 600 700 4294967295
 rqbalance.normal.down_threshold=0 100 300 400 425 500 600 650
+
+#
+# AD7146
+# PAD controller
+service.pad1.control.start=pad1_on
+service.pad2.control.start=pad2_on
