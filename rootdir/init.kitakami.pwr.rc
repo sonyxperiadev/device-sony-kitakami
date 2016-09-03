@@ -106,6 +106,10 @@ on boot
     # disallow upmigrate for cgroup's tasks
     write /dev/cpuctl/bg_non_interactive/cpu.upmigrate_discourage 1
 
+    # insert core_ctl module and use conservative paremeters
+    insmod /system/lib/modules/msm_core_ctl.ko
+    write /sys/devices/system/cpu/cpu4/core_ctl/max_cpus 1
+
     # re-enable thermal
     write /sys/module/msm_thermal/core_control/enabled 1
 
@@ -128,6 +132,15 @@ on boot
     # input boost configuration
     write /sys/module/cpu_boost/parameters/input_boost_freq "0:1344000"
     write /sys/module/cpu_boost/parameters/input_boost_ms 40
+
+    # configure core_ctl module parameters
+    write /sys/devices/system/cpu/cpu4/core_ctl/max_cpus 4
+    write /sys/devices/system/cpu/cpu4/core_ctl/min_cpus 1
+    write /sys/devices/system/cpu/cpu4/core_ctl/busy_up_thres 60
+    write /sys/devices/system/cpu/cpu4/core_ctl/busy_down_thres 30
+    write /sys/devices/system/cpu/cpu4/core_ctl/offline_delay_ms 100
+    write /sys/devices/system/cpu/cpu4/core_ctl/is_big_cluster 1
+    write /sys/devices/system/cpu/cpu4/core_ctl/task_thres 4
 
     # Setting b.L scheduler parameters
     write /proc/sys/kernel/sched_migration_fixup 1
@@ -198,3 +211,9 @@ on boot
     # change GPU initial power level from 305MHz(level 4) to 180MHz(level 5) for power savings
     write /sys/class/kgsl/kgsl-3d0/devfreq/governor "msm-adreno-tz"
     write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 5
+
+    # Post-setup services
+    rm /data/system/perfd/default_values
+    setprop ro.min_freq_0 384000
+    setprop ro.min_freq_4 384000
+    start perfd

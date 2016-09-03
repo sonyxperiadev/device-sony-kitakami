@@ -89,6 +89,19 @@ service macaddrsetup /system/bin/macaddrsetup
     disabled
     oneshot
 
+# msm specific files that need to be created on /data
+on post-fs-data
+    #Create PERFD deamon related dirs
+    mkdir /data/misc/perfd 0755 root system
+    chmod 2755 /data/misc/perfd
+    mkdir /data/system/perfd 0770 root system
+    chmod 2770 /data/system/perfd
+
+service perfd /system/vendor/bin/perfd
+   class main
+   user root
+   disabled
+
 service wpa_supplicant /system/bin/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
     -I/system/etc/wifi/wpa_supplicant_overlay.conf \

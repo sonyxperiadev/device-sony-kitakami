@@ -142,3 +142,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qti.sensors.tilt_detector=false \
     ro.qti.sensors.dpc=false \
     ro.qti.sensors.wu=true
+
+# Some functional extras
+$(call inherit-product-if-exists, vendor/qcom/proprietary/proprietary.mk)
