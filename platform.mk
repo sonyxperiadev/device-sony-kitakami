@@ -92,6 +92,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     keystore.msm8994
 
+# FM
+PRODUCT_PACKAGES += \
+    FMRadio \
+    brcm-uim-sysfs \
+    libfmjni
+
 # RILD
 PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
