@@ -21,6 +21,8 @@ on init
 
 on fs
     mount_all ./fstab.kitakami
+    swapon_all ./fstab.kitakami
+
     restorecon_recursive /persist
     write /sys/kernel/boot_adsp/boot 1
 
