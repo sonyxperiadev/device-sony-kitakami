@@ -12,21 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-on init
-    # cpuquiet rqbalance permissions
-    chown system system /sys/devices/system/cpu/cpuquiet/nr_min_cpus
-    chown system system /sys/devices/system/cpu/cpuquiet/nr_power_max_cpus
-    chown system system /sys/devices/system/cpu/cpuquiet/nr_thermal_max_cpus
-    chown system system /sys/devices/system/cpu/cpuquiet/rqbalance/balance_level
-    chown system system /sys/devices/system/cpu/cpuquiet/rqbalance/nr_run_thresholds
-    chown system system /sys/devices/system/cpu/cpuquiet/rqbalance/nr_down_run_thresholds
-    chmod 0660 /sys/devices/system/cpu/cpuquiet/nr_min_cpus
-    chmod 0660 /sys/devices/system/cpu/cpuquiet/nr_power_max_cpus
-    chmod 0660 /sys/devices/system/cpu/cpuquiet/nr_thermal_max_cpus
-    chmod 0660 /sys/devices/system/cpu/cpuquiet/rqbalance/balance_level
-    chmod 0660 /sys/devices/system/cpu/cpuquiet/rqbalance/nr_run_thresholds
-    chmod 0660 /sys/devices/system/cpu/cpuquiet/rqbalance/nr_down_run_thresholds
-
 on charger
     # Disable thermal
     write /sys/module/msm_thermal/core_control/enabled 0
@@ -72,12 +57,6 @@ on boot
     # Disable thermal
     write /sys/module/msm_thermal/core_control/enabled 0
 
-    # Allow throttling cpus as a cluster
-    # This is to compensate for the lack of perfd and libqti-perf-client.so
-    write /sys/module/msm_performance/parameters/num_clusters 2
-    write /sys/module/msm_performance/parameters/managed_cpus "0-3"
-    write /sys/module/msm_performance/parameters/managed_cpus "4-7"
-
     # disable thermal bcl hotplug to switch governor
     write /sys/module/msm_thermal/core_control/enabled 0
     write /sys/devices/soc.0/qcom,bcl.63/mode "disable"
@@ -120,17 +99,6 @@ on boot
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/max_freq_hysteresis 20000
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack 10000
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 384000
-
-    # Userspace control of cpuquiet settings
-    chown system system /sys/devices/system/cpu/cpuquiet/nr_min_cpus
-    chown system system /sys/devices/system/cpu/cpuquiet/nr_power_max_cpus
-    chown system system /sys/devices/system/cpu/cpuquiet/nr_thermal_max_cpus
-    chmod 0664 /sys/devices/system/cpu/cpuquiet/nr_min_cpus
-    chmod 0664 /sys/devices/system/cpu/cpuquiet/nr_power_max_cpus
-    chmod 0664 /sys/devices/system/cpu/cpuquiet/nr_thermal_max_cpus
-
-    # restore A57's max
-    copy /sys/devices/system/cpu/cpu4/cpufreq/cpuinfo_max_freq /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
 
     # enable boost for cgroup's tasks
     write /dev/cpuctl/cpu.sched_boost 1
