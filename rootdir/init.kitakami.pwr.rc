@@ -170,7 +170,7 @@ on boot
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
 
     # input boost configuration
-    write /sys/module/cpu_boost/parameters/input_boost_freq 1248000
+    write /sys/module/cpu_boost/parameters/input_boost_freq "0:1248000 1:1248000 2:1248000 3:1248000"
     write /sys/module/cpu_boost/parameters/input_boost_ms 40
 
     # Setting b.L scheduler parameters
