@@ -64,7 +64,7 @@ on boot
     symlink /dev/pn54x /dev/pn547
 
 # OSS WLAN and BT MAC setup
-service macaddrsetup /system/bin/macaddrsetup
+service macaddrsetup /system/bin/macaddrsetup /sys/devices/soc.0/bcmdhd_wlan.90/macaddr
     user root
     disabled
     oneshot
