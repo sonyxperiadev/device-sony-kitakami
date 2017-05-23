@@ -147,3 +147,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qti.sensors.tilt_detector=false \
     ro.qti.sensors.dpc=false \
     ro.qti.sensors.wu=true
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.camera.HAL3.enabled=0 \
+    media.stagefright.less-secure=true \
+    media.stagefright.legacyencoder=true
