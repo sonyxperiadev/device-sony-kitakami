@@ -86,6 +86,9 @@ on boot
     write /dev/cpuset/top-app/cpus 0-7
     write /dev/cpuset/camera-daemon/cpus 0-3
 
+    # Symlink for compability
+    symlink /dev/pn54x /dev/pn547
+
 # OSS WLAN and BT MAC setup
 service macaddrsetup /system/bin/macaddrsetup /sys/devices/soc/bcmdhd_wlan.90/macaddr
     class core
