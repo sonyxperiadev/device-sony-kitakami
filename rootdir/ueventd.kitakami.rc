@@ -162,8 +162,8 @@
 /sys/devices/virtual/cap_sensor/ad7146              pad_data       0440    system   system
 /sys/devices/virtual/cap_sensor/ad7146              pad_offset     0660    system   system
 /sys/devices/virtual/cap_sensor/ad7146              sw_updata      0440    system   system
-/sys/devices/virtual/switch/ad7146                  state          0660    system   system
-/sys/devices/virtual/switch/ad7146_*                state          0660    system   system
+/sys/devices/virtual/switch/ad7146                  state          0660    system   radio
+/sys/devices/virtual/switch/ad7146_*                state          0660    system   radio
 
 # BT/FM/ANT+ V4L2
 /dev/brcm_bt_drv          0660   bluetooth  net_bt_stack
