@@ -17,9 +17,11 @@ import init.common.usb-legacy.rc
 import init.kitakami.pwr.rc
 
 on init
-    symlink /dev/block/platform/soc.0/f9824900.sdhci /dev/block/bootdevice
+    write /sys/block/zram0/max_comp_streams 8
 
 on fs
+    symlink /dev/block/platform/soc.0/f9824900.sdhci /dev/block/bootdevice
+
     mount_all ./fstab.kitakami
     swapon_all ./fstab.kitakami
 
