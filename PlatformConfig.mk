@@ -14,6 +14,7 @@
 
 # Platform path
 PLATFORM_COMMON_PATH := device/sony/kitakami
+PRODUCT_PLATFORM_SOD := true
 
 TARGET_BOARD_PLATFORM := msm8994
 TARGET_KERNEL_VERSION := 3.10
